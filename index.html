@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>DOM</title>
+</head>
+
+  <style>
+    .field {
+      width: 66px;
+      font-size: 0;
+    }
+    .field__cels {
+      display: inline-block;
+      vertical-align: top;
+      width: 20px;
+      height: 20px;
+      font-size: 18px;
+      text-align: center;
+      line-height: 20px;
+      border: 1px solid #000;
+      text-align: center;
+      cursor: pointer;
+    }
+  </style>
+
+<body>
+
+    <div class="field">
+      <div class="field__cels" data-cell-num="0"></div>
+      <div class="field__cels" data-cell-num="1"></div>
+      <div class="field__cels" data-cell-num="2"></div>
+      <div class="field__cels" data-cell-num="3"></div>
+      <div class="field__cels" data-cell-num="4"></div>
+      <div class="field__cels" data-cell-num="5"></div>
+      <div class="field__cels" data-cell-num="6"></div>
+      <div class="field__cels" data-cell-num="7"></div>
+      <div class="field__cels" data-cell-num="8"></div>
+    </div>
+
+    <div class="users">Scores
+      <div class="users__user-1">0</div>
+      <div class="users__user-2">0</div>
+    </div>
+
+    <div class="popup">
+      <ul class="settings">
+        <li><a href="#">ono by one</a></li>
+        <li><a href="#">against computer</a></li>
+      </ul>
+
+      <button type="button">Play</button>
+    </div>
+
+  <script src="js/dist/script_es6.js"></script>
+
+</body>
+
+</html>
