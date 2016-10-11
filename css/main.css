@@ -28,20 +28,51 @@ body {
 }
 
 .field {
-  width: 66px;
+  float: left;
+  width: 252px;
   font-size: 0;
+  overflow: hidden;
 }
+
 .field__cels {
   display: inline-block;
   vertical-align: top;
-  width: 20px;
-  height: 20px;
-  font-size: 18px;
+  width: 80px;
+  height: 80px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  font-size: 60px;
   text-align: center;
-  line-height: 20px;
-  border: 1px solid #000;
+  line-height: 70px;
   text-align: center;
+  box-shadow: 0 0 5px #f5786f;
+  transition: all 1.5s;
+  cursor: default;
+  opacity: .7;
+}
+
+.field__cels:nth-child(3n) {
+  margin-right: 0;
+}
+.field__cels:nth-child(7),
+.field__cels:nth-child(8),
+.field__cels:nth-child(9) {
+  margin-bottom: 0;
+}
+
+.field__cels.no-marked {
+  opacity: 1;
   cursor: pointer;
+}
+
+.field__cels.no-marked:hover {
+  position: relative;
+  box-shadow: 0 0 24px #f71100;
+  transition: all .2s;
+}
+
+.users {
+  float: right;
 }
 
 .game {
@@ -58,5 +89,13 @@ body {
 .settings .btn,
 .settings .dropdown-button {
   margin-bottom: 10px;
+}
+
+.settings .dropdown-content a {
+  color: #F44336;
+}
+
+.game-popup {
+  max-width: 600px;
 }
 

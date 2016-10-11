@@ -61,6 +61,11 @@ var Game = function () {
   }
 
   _createClass(Game, [{
+    key: "_renderTotalGames",
+    value: function _renderTotalGames() {
+      document.querySelector(".users__total-games span").innerHTML = this._gameCounter;
+    }
+  }, {
     key: "_writeLog",
     value: function _writeLog(isWinner, field, steps) {
       var winer = void 0;
@@ -135,8 +140,8 @@ var Game = function () {
       }
       this._brainTimer = setTimeout(function () {
         _this2._field._setMark(cellNeedMark, _this2._users[_this2._activeUser]._type);
-        _this2._checkGameState();
         _this2._changeUser();
+        _this2._checkGameState();
         _this2._isComputerMove = false;
         console.log("end AI move");
 
@@ -208,16 +213,16 @@ var Game = function () {
         this._writeLog(true, this._field._field, this._stepsForLog);
         this._isGaveOver = true;
         // TODO спросить - продолжить или выход? если продолжить рефрешгейм, если нет выход в лобби
-        this._refreshGame();
         this._gameCounter++;
+        this._refreshGame();
       }
 
       if (!this._field._isWinner(this._field._field) && this._field._isOverGame(this._field._field)) {
         alert("there is no winners");
         this._writeLog(false, this._field._field, this._stepsForLog);
         this._isGaveOver = true;
-        this._refreshGame();
         this._gameCounter++;
+        this._refreshGame();
       }
     }
   }, {
@@ -226,14 +231,16 @@ var Game = function () {
       var field = this._field._field;
       var cells = this._field._cells;
 
-      for (var i = 0; i < field.length; i++) {
-        field[i] = "";
-        cells[i]._marked = false;
+      for (var _i = 0; _i < field.length; _i++) {
+        field[_i] = "";
+        cells[_i]._marked = false;
+        cells[_i].classList.add("no-marked");
       }
 
       this._field._renderState(field, cells);
       this._activeUser = 1;
       this._stepsForLog = [];
+      this._renderTotalGames();
     }
   }, {
     key: "_changeUser",
@@ -270,6 +277,7 @@ var Field = function () {
       field.forEach(function (elem, i) {
         if (elem !== "") {
           cells[i]._marked = true;
+          cells[i].classList.remove("no-marked");
         }
 
         cells[i].innerHTML = elem;
@@ -278,12 +286,13 @@ var Field = function () {
   }, {
     key: "_clear",
     value: function _clear() {
-      for (var i = 0; i < this._field.length; i++) {
-        this._field[i] = "";
+      for (var _i2 = 0; _i2 < this._field.length; _i2++) {
+        this._field[_i2] = "";
       }
       this._cells.forEach(function (cell) {
         cell.innerHTML = "";
         cell._marked = false;
+        cells[i].classList.add("no-marked");
       });
     }
   }, {

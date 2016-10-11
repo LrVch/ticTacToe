@@ -34,6 +34,10 @@ class Game {
     this._field._elem.addEventListener("click", this._manager.bind(this));
   }
 
+  _renderTotalGames() {
+    document.querySelector(".users__total-games span").innerHTML = this._gameCounter;
+  }
+
   _writeLog(isWinner, field, steps) {
     let winer;
 
@@ -102,8 +106,8 @@ class Game {
     }
     this._brainTimer = setTimeout(() => {
       this._field._setMark(cellNeedMark, this._users[this._activeUser]._type);
-      this._checkGameState();
       this._changeUser();
+      this._checkGameState();
       this._isComputerMove = false;
       console.log("end AI move");
 
@@ -135,7 +139,7 @@ class Game {
   }
 
   _manager(e) {
-   let target = e.target;
+    let target = e.target;
 
     if (target.closest(".field__cels")) {
       if (this._isComputerMove) return;
@@ -171,16 +175,16 @@ class Game {
       this._writeLog(true, this._field._field, this._stepsForLog);
       this._isGaveOver = true;
       // TODO спросить - продолжить или выход? если продолжить рефрешгейм, если нет выход в лобби
-      this._refreshGame();
       this._gameCounter++;
+      this._refreshGame();
     }
 
     if (!this._field._isWinner(this._field._field) && this._field._isOverGame(this._field._field)) {
       alert("there is no winners");
       this._writeLog(false, this._field._field, this._stepsForLog);
       this._isGaveOver = true;
-      this._refreshGame();
       this._gameCounter++;
+      this._refreshGame();
     }
   }
 
@@ -191,11 +195,13 @@ class Game {
     for (let i = 0; i < field.length; i++) {
       field[i] = "";
       cells[i]._marked = false;
+      cells[i].classList.add("no-marked");
     }
 
     this._field._renderState(field, cells);
     this._activeUser = 1;
     this._stepsForLog = [];
+    this._renderTotalGames();
   }
 
   _changeUser() {
@@ -227,6 +233,7 @@ class Field {
     field.forEach((elem, i) => {
       if (elem !== "") {
         cells[i]._marked = true;
+        cells[i].classList.remove("no-marked");
       }
 
       cells[i].innerHTML = elem
@@ -240,6 +247,7 @@ class Field {
     this._cells.forEach(cell => {
       cell.innerHTML = "";
       cell._marked = false;
+      cells[i].classList.add("no-marked");
     });
   }
 
