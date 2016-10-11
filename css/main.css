@@ -23,6 +23,9 @@ body {
   transform: scale(1) translateY(-50%) !important;
 }
 
+.lean-overlay {
+  top: 0 !important;
+}
 
 .field {
   width: 66px;
