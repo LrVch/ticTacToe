@@ -1,0 +1,59 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+.full-height-container,
+.full-height-row,
+.full-height-col {
+  height: 100%;
+}
+
+.full-height-row {
+  margin-bottom: 0;
+}
+
+.modal {
+  top: 50% !important;
+  transform: scale(1) translateY(-50%) !important;
+}
+
+
+.field {
+  width: 66px;
+  font-size: 0;
+}
+.field__cels {
+  display: inline-block;
+  vertical-align: top;
+  width: 20px;
+  height: 20px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 20px;
+  border: 1px solid #000;
+  text-align: center;
+  cursor: pointer;
+}
+
+.game {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.settings {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.settings .btn,
+.settings .dropdown-button {
+  margin-bottom: 10px;
+}
+

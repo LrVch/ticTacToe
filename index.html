@@ -3,56 +3,72 @@
 
 <head>
   <meta charset="utf-8">
-  <title>DOM</title>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TicTacToe</title>
 </head>
 
-  <style>
-    .field {
-      width: 66px;
-      font-size: 0;
-    }
-    .field__cels {
-      display: inline-block;
-      vertical-align: top;
-      width: 20px;
-      height: 20px;
-      font-size: 18px;
-      text-align: center;
-      line-height: 20px;
-      border: 1px solid #000;
-      text-align: center;
-      cursor: pointer;
-    }
-  </style>
-
-<body>
-
-    <div class="field">
-      <div class="field__cels" data-cell-num="0"></div>
-      <div class="field__cels" data-cell-num="1"></div>
-      <div class="field__cels" data-cell-num="2"></div>
-      <div class="field__cels" data-cell-num="3"></div>
-      <div class="field__cels" data-cell-num="4"></div>
-      <div class="field__cels" data-cell-num="5"></div>
-      <div class="field__cels" data-cell-num="6"></div>
-      <div class="field__cels" data-cell-num="7"></div>
-      <div class="field__cels" data-cell-num="8"></div>
+<body class="blue">
+  <div class="container full-height-container">
+    <div class="row full-height-row">
+      <div class="col s12 full-height-col">
+        <div class="game">
+          <div class="settings">
+            <div class="settings__btns">
+              <a class='dropdown-button btn red  waves-effect waves-light' href='#' data-activates='dropdown1' >against who?</a>
+              <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="#!" class="against-computer">against ai</a></li>
+                <li><a href="#!" class="ono-by-one">one by one</a></li>
+              </ul>
+              <a class='dropdown-button btn red  waves-effect waves-light' href='#' data-activates='dropdown2'>choose weapoon</a>
+              <ul id='dropdown2' class='dropdown-content'>
+                <li><a href="#!" class="weapoon-x">X</a></li>
+                <li><a href="#!" class="weapoon-o">O</a></li>
+              </ul>
+              <a href="#game-modal" class="red btn btn-paly waves-effect waves-light modal-trigger">Play</a>
+            </div>
+            <div class="chips">
+               <div class="chip__who chip">against ai</div>
+               <div class="chip__weapoon chip">your weapoon "X"</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="users">Scores
-      <div class="users__user-1">0</div>
-      <div class="users__user-2">0</div>
+    <div id="game-modal" class="modal game-popup">
+      <div class="modal-content">
+        <!-- <a href="#" class="game-popup__close">X</a> -->
+        <div class="field">
+          <div class="field__cels" data-cell-num="0"></div>
+          <div class="field__cels" data-cell-num="1"></div>
+          <div class="field__cels" data-cell-num="2"></div>
+          <div class="field__cels" data-cell-num="3"></div>
+          <div class="field__cels" data-cell-num="4"></div>
+          <div class="field__cels" data-cell-num="5"></div>
+          <div class="field__cels" data-cell-num="6"></div>
+          <div class="field__cels" data-cell-num="7"></div>
+          <div class="field__cels" data-cell-num="8"></div>
+        </div>
+        <div class="users">Scores
+          <div class="users__user-1">0</div>
+          <div class="users__user-2">0</div>
+          <div class="users__mount-games">0</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action waves-effect waves-green btn-flat  game-popup__close">Close</a>
+      </div>
     </div>
 
-    <div class="popup">
-      <ul class="settings">
-        <li><a href="#">ono by one</a></li>
-        <li><a href="#">against computer</a></li>
-      </ul>
-
-      <button type="button">Play</button>
-    </div>
-
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <script src="js/plugins/plugins.js"></script>
   <script src="js/dist/script_es6.js"></script>
 
 </body>
