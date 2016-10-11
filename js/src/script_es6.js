@@ -27,6 +27,7 @@ class Game {
     this._againstsWho = againstsWho;
     this._logs = [];
     this._stepsForLog = [];
+    this._brainTimer;
 
     console.log("game is created");
 
@@ -99,7 +100,7 @@ class Game {
         }
       }
     }
-    setTimeout(() => {
+    this._brainTimer = setTimeout(() => {
       this._field._setMark(cellNeedMark, this._users[this._activeUser]._type);
       this._checkGameState();
       this._changeUser();
@@ -172,7 +173,6 @@ class Game {
       // TODO спросить - продолжить или выход? если продолжить рефрешгейм, если нет выход в лобби
       this._refreshGame();
       this._gameCounter++;
-
     }
 
     if (!this._field._isWinner(this._field._field) && this._field._isOverGame(this._field._field)) {
@@ -383,6 +383,7 @@ class Lobby {
     this._game._refreshGame();
     this._game._logs = [];
     this._game._stepsForLog = [];
+    clearTimeout(this._game._brainTimer);
   }
 
   _end() {

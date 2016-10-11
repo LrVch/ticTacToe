@@ -53,6 +53,7 @@ var Game = function () {
     this._againstsWho = againstsWho;
     this._logs = [];
     this._stepsForLog = [];
+    this._brainTimer;
 
     console.log("game is created");
 
@@ -132,7 +133,7 @@ var Game = function () {
           }
         }
       }
-      setTimeout(function () {
+      this._brainTimer = setTimeout(function () {
         _this2._field._setMark(cellNeedMark, _this2._users[_this2._activeUser]._type);
         _this2._checkGameState();
         _this2._changeUser();
@@ -441,6 +442,7 @@ var Lobby = function () {
       this._game._refreshGame();
       this._game._logs = [];
       this._game._stepsForLog = [];
+      clearTimeout(this._game._brainTimer);
     }
   }, {
     key: "_end",
