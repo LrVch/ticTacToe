@@ -135,30 +135,35 @@ var Game = function () {
   }, {
     key: "_brain",
     value: function _brain() {
-      var _this2 = this;
-
       // TODO very stupid brain, fix it
       var field = this._field._field;
       var cells = this._field._cells;
       var cellNeedMark = "";
 
       if (field[4] === "") {
-        console.log("hard");
         cellNeedMark = 4;
       } else {
         while (true) {
           var cellNum = Math.round(Math.random() * 9);
 
           if (field[cellNum] === "") {
-            console.log("easy");
             cellNeedMark = cellNum;
             break;
           }
         }
       }
 
+      return cellNeedMark;
+    }
+  }, {
+    key: "_makeComputerMove",
+    value: function _makeComputerMove(cellNumber) {
+      var _this2 = this;
+
+      this._isComputerMove = true;
+
       this._brainTimer = setTimeout(function () {
-        _this2._field._setMark(cellNeedMark, _this2._users[_this2._activeUser]._type);
+        _this2._field._setMark(cellNumber, _this2._users[_this2._activeUser]._type);
         _this2._checkGameState();
         _this2._isComputerMove = false;
         console.log("end AI move");
@@ -220,8 +225,7 @@ var Game = function () {
         this._changeUser();
 
         if (this._againstsWho === "computer") {
-          this._isComputerMove = true;
-          this._brain();
+          this._makeComputerMove(this._brain());
         }
         return;
       }
@@ -248,7 +252,6 @@ var Game = function () {
         this._users[this._activeUser]._render(this._activeUser, this._users[this._activeUser]._score);
         this._writeLog(true, this._field._field, this._stepsForLog);
         this._isGaveOver = true;
-        // TODO спросить - продолжить или выход? если продолжить рефрешгейм, если нет выход в лобби
         this._gameCounter++;
         this._blockField(this._field._cells);
         Materialize.toast('Palyer ' + this._users[this._activeUser]._type + " win!", 1500, '', function () {
@@ -285,6 +288,16 @@ var Game = function () {
       this._renderTotalGames();
       this._renderDeadHeat();
       this._markActiveUser(this._activeUser);
+    }
+  }, {
+    key: "_gameReset",
+    value: function _gameReset() {
+      this._isComputerMove = false;
+      this._gameCounter = 0;
+      this._deadHeat = 0;
+      this._refreshGame();
+      this._logs = [];
+      clearTimeout(this._brainTimer);
     }
   }, {
     key: "_changeUser",
@@ -473,8 +486,16 @@ var Lobby = function () {
       console.log("start");
     }
   }, {
-    key: "_clearGameData",
-    value: function _clearGameData() {
+    key: "_resetLobby",
+    value: function _resetLobby() {
+      this._settings.userWeapoon = "x";
+      this._settings.againstsWho = "computer";
+      this._showChip("against ai", "chip__who", this._settings.chips);
+      this._showChip("your weapoon \"" + this._settings.userWeapoon + "\"", "chip__weapoon", this._settings.chips);
+    }
+  }, {
+    key: "_restoreGameData",
+    value: function _restoreGameData() {
       // reset User constructor
       var users = this._game._users;
 
@@ -484,27 +505,17 @@ var Lobby = function () {
       }
 
       // reset Lobby constructor
-      this._settings.userWeapoon = "x";
-      this._settings.againstsWho = "computer";
-      this._showChip("against ai", "chip__who", this._settings.chips);
-      this._showChip("your weapoon \"" + this._settings.userWeapoon + "\"", "chip__weapoon", this._settings.chips);
+      this._resetLobby();
 
       // reset Game constructor
-      this._game._isComputerMove = false;
-      this._game._activeUser = 1;
-      this._game._gameCounter = 0;
-      this._game._deadHeat = 0;
-      this._game._refreshGame();
-      this._game._logs = [];
-      this._game._stepsForLog = [];
-      clearTimeout(this._game._brainTimer);
+      this._game._gameReset();
     }
   }, {
     key: "_end",
     value: function _end() {
       $('#game-modal').closeModal();
       this._isGame = false;
-      this._clearGameData();
+      this._restoreGameData();
       console.log("end");
     }
   }, {
