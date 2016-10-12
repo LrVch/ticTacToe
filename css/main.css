@@ -47,9 +47,9 @@ body {
   text-align: center;
   color: #555;
   box-shadow: 0 0 5px #f5786f;
-  transition: all 1.5s;
+  transition: all 1s;
   cursor: default;
-  opacity: .3;
+  opacity: .2;
 }
 
 .field__cels:nth-child(3n) {
@@ -66,12 +66,12 @@ body {
   cursor: pointer;
 }
 
-.field__cels.no-marked:hover {
+/* .field__cels.no-marked:hover {
   position: relative;
   box-shadow: 0 0 44px #de584e;
   transition: all .2s;
 }
-
+ */
 .game {
   display: table;
   width: 100%;
@@ -142,5 +142,11 @@ body {
 
   .field {
     float: left;
+  }
+
+  .field__cels.no-marked:hover {
+    position: relative;
+    box-shadow: 0 0 10px #de584e;
+    transition: all .3s;
   }
 }
