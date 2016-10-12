@@ -28,8 +28,8 @@ body {
 }
 
 .field {
-  float: left;
   width: 252px;
+  margin: 0 auto;
   font-size: 0;
   overflow: hidden;
 }
@@ -68,12 +68,8 @@ body {
 
 .field__cels.no-marked:hover {
   position: relative;
-  box-shadow: 0 0 24px #f71100;
+  box-shadow: 0 0 44px #de584e;
   transition: all .2s;
-}
-
-.users {
-  float: right;
 }
 
 .game {
@@ -97,14 +93,18 @@ body {
 }
 
 .game-popup {
+  width: 90%;
   max-width: 420px;
-  max-height: none !important;
+  max-height: 100% !important;
 }
 
 .users {
   width: 100px;
+  margin: 0 auto;
+  margin-top: 15px;
   font-size: 0;
 }
+
 .users__item {
   display: inline-block;
   width: 50%;
@@ -121,11 +121,26 @@ body {
 .users__item:nth-child(2) {
   border-left: 2px solid #000;
 }
-.users__total-games {
-  margin-top: 30px;
+.users__total-games,
+.users__dead-heat {
+  margin-top: 10px;
   font-size: 16px;
   text-transform: uppercase;
   text-align: center;
 }
 
+.users__dead-heat {
+  margin-top: 0;
+  font-size: 12px;
+}
 
+@media screen and (min-width: 768px) {
+  .users {
+    float: right;
+    margin: 0;
+  }
+
+  .field {
+    float: left;
+  }
+}

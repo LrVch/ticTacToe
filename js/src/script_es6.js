@@ -28,6 +28,7 @@ class Game {
     this._logs = [];
     this._stepsForLog = [];
     this._brainTimer;
+    this._deadHeat = 0;
 
     console.log("game is created");
 
@@ -36,6 +37,10 @@ class Game {
 
   _renderTotalGames() {
     document.querySelector(".users__total-games span").innerHTML = this._gameCounter;
+  }
+
+  _renderDeadHeat() {
+    document.querySelector(".users__dead-heat span").innerHTML = this._deadHeat;
   }
 
   _writeLog(isWinner, field, steps) {
@@ -104,9 +109,9 @@ class Game {
         }
       }
     }
+
     this._brainTimer = setTimeout(() => {
       this._field._setMark(cellNeedMark, this._users[this._activeUser]._type);
-      this._changeUser();
       this._checkGameState();
       this._isComputerMove = false;
       console.log("end AI move");
@@ -115,7 +120,9 @@ class Game {
         this._isGaveOver = false;
         return;
       }
-    }, 1000);
+
+      this._changeUser();
+    }, 500);
   }
 
   _setUsersType(value) {
@@ -124,11 +131,15 @@ class Game {
     if (value === "x") {
       users[1]._type = "x";
       users[2]._type = "o";
+      document.querySelector(".users__user-1").closest('.users__item').firstChild.data = "x";
+      document.querySelector(".users__user-2").closest('.users__item').firstChild.data = "o";
     }
 
     if (value === "o"){
       users[1]._type = "o";
       users[2]._type = "x";
+      document.querySelector(".users__user-1").closest('.users__item').firstChild.data = "o";
+      document.querySelector(".users__user-2").closest('.users__item').firstChild.data = "x";
     }
   }
 
@@ -166,6 +177,15 @@ class Game {
     }
   }
 
+  _blockField(cells) {
+    cells.forEach(cell => {
+      if(!cell._marked) {
+        cell._marked = true
+        cell.classList.remove("no-marked");
+      }
+    });
+  }
+
   _checkGameState() {
     this._stepsForLog.push(this._field._field.slice());
 
@@ -176,15 +196,22 @@ class Game {
       this._isGaveOver = true;
       // TODO спросить - продолжить или выход? если продолжить рефрешгейм, если нет выход в лобби
       this._gameCounter++;
-      this._refreshGame();
+      this._blockField(this._field._cells);
+      Materialize.toast('Palyer ' + this._users[this._activeUser]._type + " win!", 1500,'',() => {
+        this._refreshGame();
+      });
     }
 
     if (!this._field._isWinner(this._field._field) && this._field._isOverGame(this._field._field)) {
-      alert("there is no winners");
       this._writeLog(false, this._field._field, this._stepsForLog);
       this._isGaveOver = true;
       this._gameCounter++;
-      this._refreshGame();
+      this._deadHeat++;
+      Materialize.toast('there is no winners', 1500,'',() => {
+        console.log('there is no winners');
+        this._refreshGame();
+      });
+
     }
   }
 
@@ -202,6 +229,7 @@ class Game {
     this._activeUser = 1;
     this._stepsForLog = [];
     this._renderTotalGames();
+    this._renderDeadHeat();
   }
 
   _changeUser() {
@@ -308,7 +336,7 @@ class Lobby {
     this._init();
   }
 
-  _showToast(mess, checkClass, chips) {
+  _showChip(mess, checkClass, chips) {
     let chip = chips.querySelector("." + checkClass);
 
     chip.innerHTML = mess;
@@ -319,25 +347,25 @@ class Lobby {
 
     if (target.closest(".against-computer")) {
       this._settings.againstsWho = "computer";
-      this._showToast("against ai", "chip__who", this._settings.chips);
+      this._showChip("against ai", "chip__who", this._settings.chips);
       return;
     }
 
     if (target.closest(".ono-by-one")) {
       this._settings.againstsWho = "user";
-      this._showToast("one by one", "chip__who", this._settings.chips);
+      this._showChip("one by one", "chip__who", this._settings.chips);
       return;
     }
 
     if (target.closest(".weapoon-x")) {
       this._settings.userWeapoon = "x";
-      this._showToast("your weapoon \"X\"", "chip__weapoon", this._settings.chips);
+      this._showChip("your weapoon \"" + this._settings.userWeapoon + "\"", "chip__weapoon", this._settings.chips);
       return;
     }
 
     if (target.closest(".weapoon-o")) {
       this._settings.userWeapoon = "o";
-      this._showToast("your weapoon \"O\"", "chip__weapoon", this._settings.chips);
+      this._showChip("your weapoon \"" + this._settings.userWeapoon + "\"", "chip__weapoon", this._settings.chips);
       return;
     }
 
@@ -359,7 +387,6 @@ class Lobby {
   _start() {
     if (this._isGame) return;
 
-    // this._gamePopup.hidden = false;
     this._isGame = true;
 
     this._game._setAgainstWho(this._settings.againstsWho);
@@ -381,13 +408,14 @@ class Lobby {
     // reset Lobby constructor
     this._settings.userWeapoon = "x";
     this._settings.againstsWho = "computer";
-    this._showToast("against ai", "chip__who", this._settings.chips);
-    this._showToast("your weapoon \"X\"", "chip__weapoon", this._settings.chips);
+    this._showChip("against ai", "chip__who", this._settings.chips);
+    this._showChip("your weapoon \"" + this._settings.userWeapoon + "\"", "chip__weapoon", this._settings.chips);
 
     // reset Game constructor
     this._game._isComputerMove = false;
     this._game._activeUser = 1;
     this._game._gameCounter = 0;
+    this._game._deadHeat = 0;
     this._game._refreshGame();
     this._game._logs = [];
     this._game._stepsForLog = [];
@@ -395,7 +423,6 @@ class Lobby {
   }
 
   _end() {
-    // this._gamePopup.hidden = true;
     $('#game-modal').closeModal();
     this._isGame = false;
     this._clearGameData();
