@@ -90,7 +90,17 @@ class Game {
     });
   }
 
-  _brain() {
+  _markActiveUser(activeUser) {
+    let users = document.querySelectorAll(".users__item");
+
+    for (let i = 0; i < users.length; i++) {
+      users[i].classList.remove("active");
+    }
+
+    document.querySelector(".users__user-" + activeUser).parentNode.classList.add("active");
+  }
+
+  _brain() { // TODO very stupid brain, fix it
     let field = this._field._field;
     let cells = this._field._cells;
     let cellNeedMark = "";
@@ -230,6 +240,7 @@ class Game {
     this._stepsForLog = [];
     this._renderTotalGames();
     this._renderDeadHeat();
+    this._markActiveUser(this._activeUser);
   }
 
   _changeUser() {
@@ -238,6 +249,8 @@ class Game {
     } else {
       this._activeUser = 1;
     }
+
+    this._markActiveUser(this._activeUser);
   }
 }
 

@@ -106,10 +106,23 @@ body {
 }
 
 .users__item {
+  position: relative;
   display: inline-block;
   width: 50%;
   font-size: 24px;
   text-align: center;
+}
+
+.users__item.active:before {
+  position: absolute;
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: #00897b;
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -1px;
 }
 
 .users__item span {

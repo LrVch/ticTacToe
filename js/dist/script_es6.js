@@ -122,10 +122,22 @@ var Game = function () {
       });
     }
   }, {
+    key: "_markActiveUser",
+    value: function _markActiveUser(activeUser) {
+      var users = document.querySelectorAll(".users__item");
+
+      for (var _i = 0; _i < users.length; _i++) {
+        users[_i].classList.remove("active");
+      }
+
+      document.querySelector(".users__user-" + activeUser).parentNode.classList.add("active");
+    }
+  }, {
     key: "_brain",
     value: function _brain() {
       var _this2 = this;
 
+      // TODO very stupid brain, fix it
       var field = this._field._field;
       var cells = this._field._cells;
       var cellNeedMark = "";
@@ -261,10 +273,10 @@ var Game = function () {
       var field = this._field._field;
       var cells = this._field._cells;
 
-      for (var _i = 0; _i < field.length; _i++) {
-        field[_i] = "";
-        cells[_i]._marked = false;
-        cells[_i].classList.add("no-marked");
+      for (var _i2 = 0; _i2 < field.length; _i2++) {
+        field[_i2] = "";
+        cells[_i2]._marked = false;
+        cells[_i2].classList.add("no-marked");
       }
 
       this._field._renderState(field, cells);
@@ -272,6 +284,7 @@ var Game = function () {
       this._stepsForLog = [];
       this._renderTotalGames();
       this._renderDeadHeat();
+      this._markActiveUser(this._activeUser);
     }
   }, {
     key: "_changeUser",
@@ -281,6 +294,8 @@ var Game = function () {
       } else {
         this._activeUser = 1;
       }
+
+      this._markActiveUser(this._activeUser);
     }
   }]);
 
@@ -317,8 +332,8 @@ var Field = function () {
   }, {
     key: "_clear",
     value: function _clear() {
-      for (var _i2 = 0; _i2 < this._field.length; _i2++) {
-        this._field[_i2] = "";
+      for (var _i3 = 0; _i3 < this._field.length; _i3++) {
+        this._field[_i3] = "";
       }
       this._cells.forEach(function (cell) {
         cell.innerHTML = "";
