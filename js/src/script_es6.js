@@ -15,8 +15,29 @@ class User {
   }
 }
 
+class Brain { // TODO very stupid brain, fix it
+  _think(field) {
+    let cellNeedMark = "";
+
+    if (field[4] === "") {
+      cellNeedMark = 4;
+    } else {
+      while(true) {
+        let cellNum = Math.round(Math.random() * 9);
+
+        if (field[cellNum] === "") {
+          cellNeedMark = cellNum;
+          break;
+        }
+      }
+    }
+
+    return cellNeedMark;
+  }
+}
+
 class Game {
-  constructor({user1, user2, field, againstsWho = "computer"} = {}) {
+  constructor({user1, user2, field, againstsWho = "computer", brain} = {}) {
     this._users = {
       1: user1,
       2: user2
@@ -29,6 +50,7 @@ class Game {
     this._stepsForLog = [];
     this._brainTimer;
     this._deadHeat = 0;
+    this._brain = brain;
 
     console.log("game is created");
 
@@ -100,27 +122,6 @@ class Game {
     document.querySelector(".users__user-" + activeUser).parentNode.classList.add("active");
   }
 
-  _brain() { // TODO very stupid brain, fix it
-    let field = this._field._field;
-    let cells = this._field._cells;
-    let cellNeedMark = "";
-
-    if (field[4] === "") {
-      cellNeedMark = 4;
-    } else {
-      while(true) {
-        let cellNum = Math.round(Math.random() * 9);
-
-        if (field[cellNum] === "") {
-          cellNeedMark = cellNum;
-          break;
-        }
-      }
-    }
-
-    return cellNeedMark;
-  }
-
   _makeComputerMove(cellNumber) {
     this._isComputerMove = true;
 
@@ -184,8 +185,9 @@ class Game {
       this._changeUser();
 
       if (this._againstsWho === "computer") {
-        this._makeComputerMove(this._brain());
+        this._makeComputerMove(this._brain._think(this._field._field));
       }
+
       return;
     }
   }
@@ -454,7 +456,8 @@ class Lobby {
     this._game = new Game({
       field: new Field(this._field),
       user1: new User({type: "x"}),
-      user2: new User({type: "o"})
+      user2: new User({type: "o"}),
+      brain: new Brain()
     });
   }
 }

@@ -31,6 +31,37 @@ var User = function () {
   return User;
 }();
 
+var Brain = function () {
+  function Brain() {
+    _classCallCheck(this, Brain);
+  }
+
+  _createClass(Brain, [{
+    key: "_think",
+    // TODO very stupid brain, fix it
+    value: function _think(field) {
+      var cellNeedMark = "";
+
+      if (field[4] === "") {
+        cellNeedMark = 4;
+      } else {
+        while (true) {
+          var cellNum = Math.round(Math.random() * 9);
+
+          if (field[cellNum] === "") {
+            cellNeedMark = cellNum;
+            break;
+          }
+        }
+      }
+
+      return cellNeedMark;
+    }
+  }]);
+
+  return Brain;
+}();
+
 var Game = function () {
   function Game() {
     var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -40,6 +71,7 @@ var Game = function () {
     var field = _ref2.field;
     var _ref2$againstsWho = _ref2.againstsWho;
     var againstsWho = _ref2$againstsWho === undefined ? "computer" : _ref2$againstsWho;
+    var brain = _ref2.brain;
 
     _classCallCheck(this, Game);
 
@@ -55,6 +87,7 @@ var Game = function () {
     this._stepsForLog = [];
     this._brainTimer;
     this._deadHeat = 0;
+    this._brain = brain;
 
     console.log("game is created");
 
@@ -133,29 +166,6 @@ var Game = function () {
       document.querySelector(".users__user-" + activeUser).parentNode.classList.add("active");
     }
   }, {
-    key: "_brain",
-    value: function _brain() {
-      // TODO very stupid brain, fix it
-      var field = this._field._field;
-      var cells = this._field._cells;
-      var cellNeedMark = "";
-
-      if (field[4] === "") {
-        cellNeedMark = 4;
-      } else {
-        while (true) {
-          var cellNum = Math.round(Math.random() * 9);
-
-          if (field[cellNum] === "") {
-            cellNeedMark = cellNum;
-            break;
-          }
-        }
-      }
-
-      return cellNeedMark;
-    }
-  }, {
     key: "_makeComputerMove",
     value: function _makeComputerMove(cellNumber) {
       var _this2 = this;
@@ -225,8 +235,9 @@ var Game = function () {
         this._changeUser();
 
         if (this._againstsWho === "computer") {
-          this._makeComputerMove(this._brain());
+          this._makeComputerMove(this._brain._think(this._field._field));
         }
+
         return;
       }
     }
@@ -524,7 +535,8 @@ var Lobby = function () {
       this._game = new Game({
         field: new Field(this._field),
         user1: new User({ type: "x" }),
-        user2: new User({ type: "o" })
+        user2: new User({ type: "o" }),
+        brain: new Brain()
       });
     }
   }]);
