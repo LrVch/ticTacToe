@@ -148,7 +148,7 @@ class Game {
       this._changeUser();
 
       if (this._againstsWho === "computer") {
-        this._makeComputerMove(this._brain._think(this._field._field));
+        this._makeComputerMove(this._brain._think(this._field._field, this._users));
       }
 
       return;
