@@ -53,6 +53,9 @@ class ViewerHistory {
     viewer.querySelector(".history__viewer-list").innerHTML = "";
     viewer.querySelector(".history__viewer-list").appendChild(ul);
 
+    ul.parentNode.scrollTop = ul.parentNode.scrollHeight;
+
+
     this._showFullLog(logs[logs.length - 1]);
 
   }
