@@ -1,0 +1,17 @@
+{
+  "name": "babel-intro",
+  "version": "1.0.0",
+  "description": "Знакомство с Babel",
+  "scripts": {
+    "start": "babel js/src -d js/dist -w"
+  },
+  "babel": {
+    "presets": ["es2015"],
+    "plugins": [],
+    "ignore": "*test.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0"
+  }
+}

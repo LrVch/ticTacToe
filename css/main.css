@@ -1,0 +1,249 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+.full-height-container,
+.full-height-row,
+.full-height-col {
+  height: 100%;
+}
+
+.full-height-row {
+  margin-bottom: 0;
+}
+
+.modal {
+  top: 50% !important;
+  transform: scale(1) translateY(-50%) !important;
+}
+
+.lean-overlay {
+  top: 0 !important;
+}
+
+.field {
+  width: 252px;
+  margin: 0 auto;
+  font-size: 0;
+  overflow: hidden;
+}
+
+.field__cels {
+  display: inline-block;
+  vertical-align: top;
+  width: 80px;
+  height: 80px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  font-size: 60px;
+  text-align: center;
+  line-height: 70px;
+  text-align: center;
+  color: #555;
+  box-shadow: 0 0 5px #f5786f;
+  transition: all 1s;
+  cursor: default;
+  opacity: .2;
+}
+
+.field__cels:nth-child(3n) {
+  margin-right: 0;
+}
+.field__cels:nth-child(7),
+.field__cels:nth-child(8),
+.field__cels:nth-child(9) {
+  margin-bottom: 0;
+}
+
+.field__cels.no-marked {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.game {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.settings {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.settings .btn,
+.settings .dropdown-button {
+  margin-bottom: 10px;
+}
+
+.settings .dropdown-content a {
+  color: #F44336;
+}
+
+.game-popup {
+  width: 90%;
+  max-width: 420px;
+  max-height: 100% !important;
+}
+
+.users {
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 15px;
+  font-size: 0;
+}
+
+.users__item {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  font-size: 24px;
+  text-align: center;
+}
+
+.users__item.active:before {
+  position: absolute;
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: #00897b;
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -1px;
+}
+
+.users__item span {
+  display: block;
+  padding: 10px 0;
+  border-top: 2px solid #000;
+}
+
+.users__item:nth-child(2) {
+  border-left: 2px solid #000;
+}
+.users__total-games,
+.users__dead-heat {
+  margin-top: 10px;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.users__dead-heat {
+  margin-top: 0;
+  font-size: 12px;
+}
+
+
+
+.history {
+  display: none;
+  position: fixed;
+  z-index: 1500;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.history.open {
+  display: table;
+}
+
+.history__inner {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.history__body {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.history__viewer {
+  padding: 10px 0;
+  color: #555;
+}
+
+.history__viewer-list {
+  display: inline-block;
+  vertical-align: top;
+  width: 40%;
+  max-height: 300px;
+  padding-right: 8px;
+  overflow: auto;
+}
+
+.history__viewer-view {
+  display: inline-block;
+  vertical-align: top;
+  width: 58%;
+  max-height: 300px;
+  padding: 10px 0;
+  overflow: auto;
+}
+
+.log-field.field {
+  float: none;
+  width: 162px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.log-field.field:last-child {
+  margin-bottom: 0;
+}
+
+.log-field.field .field__cels {
+  width: 50px;
+  height: 50px;
+  font-size: 40px;
+  line-height: 45px;
+  opacity: 1;
+  cursor: default;
+}
+
+.log-field.field .field__cels:hover {
+  box-shadow: 0 0 5px #f5786f;
+}
+
+.logs {
+  margin: 0;
+}
+
+.log__item {
+  cursor: pointer;
+}
+
+.log__item.active {
+}
+
+
+@media screen and (min-width: 768px) {
+  .users {
+    float: right;
+    margin: 0;
+  }
+
+  .field {
+    float: left;
+  }
+
+  .field__cels.no-marked:hover {
+    position: relative;
+    box-shadow: 0 0 10px #de584e;
+    transition: all .3s;
+  }
+}
