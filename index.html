@@ -42,7 +42,6 @@
 
     <div id="game-modal" class="modal game-popup">
       <div class="modal-content">
-        <!-- <a href="#" class="game-popup__close">X</a> -->
         <div class="field">
           <div class="field__cels  no-marked" data-cell-num="0"></div>
           <div class="field__cels  no-marked" data-cell-num="1"></div>
@@ -64,6 +63,23 @@
       </div>
       <div class="modal-footer">
         <a href="#!" class="waves-effect waves-light red btn hoverable game-popup__close">Close</a>
+        <a href="#!" class="waves-effect waves-light red btn hoverable left trigger-history disabled">View history</a>
+      </div>
+    </div>
+
+    <div class="history grey darken-4">
+      <div class="history__inner">
+        <div class="history__body">
+          <div class="history__header">
+            <a href="#!" class="waves-effect waves-light red btn hoverable history__close">Close</a>
+          </div>
+          <div class="history__viewer">
+            <div class="history__viewer-list">
+            </div>
+            <div class="history__viewer-view z-depth-1">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -76,6 +92,7 @@
   <script src="js/dist/brain_es6.js"></script>
   <script src="js/dist/field_es6.js"></script>
   <script src="js/dist/game_es6.js"></script>
+  <script src="js/dist/viewerHistory_es6.js"></script>
   <script src="js/dist/lobby_es6.js"></script>
 
 </body>

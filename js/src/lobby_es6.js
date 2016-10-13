@@ -62,6 +62,14 @@ class Lobby {
       this._end();
       return;
     }
+
+    if (target.closest(".trigger-history")) {
+      if (!this._game._logs.length) {
+        return;
+      }
+      this._game._viewerHistory._showViewerHistory(this._game._logs);
+      return;
+    }
   }
 
   _start() {
@@ -111,7 +119,11 @@ class Lobby {
       field: new Field(this._field),
       user1: new User({type: "x"}),
       user2: new User({type: "o"}),
-      brain: new Brain()
+      brain: new Brain(),
+      viewerHistory: new ViewerHistory({
+        trigger: document.querySelector(".trigger-history"),
+        view: document.querySelector(".history")
+      })
     });
   }
 }

@@ -1,5 +1,5 @@
 class Game {
-  constructor({user1, user2, field, againstsWho = "computer", brain} = {}) {
+  constructor({user1, user2, field, againstsWho = "computer", brain, viewerHistory} = {}) {
     this._users = {
       1: user1,
       2: user2
@@ -13,6 +13,7 @@ class Game {
     this._brainTimer;
     this._deadHeat = 0;
     this._brain = brain;
+    this._viewerHistory = viewerHistory;
 
     console.log("game is created");
 
@@ -207,14 +208,19 @@ class Game {
     this._renderTotalGames();
     this._renderDeadHeat();
     this._markActiveUser(this._activeUser);
+    if (this._logs.length) {
+      document.querySelector(".trigger-history").classList.remove("disabled");
+    } else {
+      document.querySelector(".trigger-history").classList.add("disabled");
+    }
   }
 
   _gameReset() {
     this._isComputerMove = false;
     this._gameCounter = 0;
     this._deadHeat = 0;
-    this._refreshGame();
     this._logs = [];
+    this._refreshGame();
     clearTimeout(this._brainTimer);
   }
 

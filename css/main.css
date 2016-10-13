@@ -66,12 +66,6 @@ body {
   cursor: pointer;
 }
 
-/* .field__cels.no-marked:hover {
-  position: relative;
-  box-shadow: 0 0 44px #de584e;
-  transition: all .2s;
-}
- */
 .game {
   display: table;
   width: 100%;
@@ -146,6 +140,95 @@ body {
   margin-top: 0;
   font-size: 12px;
 }
+
+
+
+.history {
+  display: none;
+  position: fixed;
+  z-index: 1500;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.history.open {
+  display: table;
+}
+
+.history__inner {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.history__body {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.history__viewer {
+  padding: 10px 0;
+  color: #555;
+}
+
+.history__viewer-list {
+  display: inline-block;
+  vertical-align: top;
+  width: 40%;
+  max-height: 300px;
+  padding-right: 8px;
+  overflow: auto;
+}
+
+.history__viewer-view {
+  display: inline-block;
+  vertical-align: top;
+  width: 58%;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.log-field.field {
+  float: none;
+  width: 162px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.log-field.field:last-child {
+  margin-bottom: 0;
+}
+
+.log-field.field .field__cels {
+  width: 50px;
+  height: 50px;
+  font-size: 40px;
+  line-height: 45px;
+  opacity: 1;
+  cursor: default;
+}
+
+.log-field.field .field__cels:hover {
+  box-shadow: 0 0 5px #f5786f;
+}
+
+.logs {
+  margin: 0;
+}
+
+.log__item {
+  cursor: pointer;
+}
+
+.log__item.active {
+}
+
 
 @media screen and (min-width: 768px) {
   .users {
