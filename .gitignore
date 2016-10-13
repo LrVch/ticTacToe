@@ -46,5 +46,5 @@ node_modules
 .tmp
 app/bower
 *.map
-dist
+#dist
 #/rs-conf.j
