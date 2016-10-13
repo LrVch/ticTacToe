@@ -191,6 +191,7 @@ body {
   vertical-align: top;
   width: 58%;
   max-height: 300px;
+  padding: 10px 0;
   overflow: auto;
 }
 
